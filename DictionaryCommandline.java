@@ -11,11 +11,11 @@ public class DictionaryCommandline {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            int n = sc.nextInt();
-            if (n == 1) {
+            int mode = sc.nextInt();
+            if (mode == 1) {
                 DictionaryManagement.insertFromCommanline();
             }
-            if (n == 2) {
+            if (mode == 2) {
                 DictionaryCommandline.showAllWords();
             }
         }
