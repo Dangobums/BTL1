@@ -11,12 +11,32 @@ public class DictionaryCommandline {
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
-            int n = sc.nextInt();
-            if (n == 1) {
+            int mode = sc.nextInt();
+            if (mode == 1) {
                 DictionaryManagement.insertFromCommanline();
             }
-            if (n == 2) {
+            if (mode == 2) {
                 DictionaryCommandline.showAllWords();
+            }
+        }
+    }
+    public static void dictionaryAdvanced() throws Exception {
+        System.out.println("Choose a thing to do");
+        System.out.println("1.Insert from commandline" + "\n2.ShowAllWords");
+        Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
+        while (isRunning) {
+            int mode = sc.nextInt();
+            switch (mode) {
+                case 1:
+                    DictionaryManagement.insertFromFile();
+                    break;
+                case 2:
+                    DictionaryCommandline.showAllWords();
+                    break;
+                case 3:
+                    Dictionary.lookUp();
+
             }
         }
     }
