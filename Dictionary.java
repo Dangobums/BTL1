@@ -33,4 +33,14 @@ public class Dictionary {
             i++;
         }
     }
+    public static String outPut(String search_word) {
+        String result = new String();
+        int i = 1;
+        for (Word word : words) {
+            if (word.getWord_target().contains(search_word)) {
+                result += word.getWord_target() + "\n";
+            }
+        }
+        return result;
+    }
 }

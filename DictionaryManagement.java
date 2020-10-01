@@ -37,6 +37,7 @@ public class DictionaryManagement {
     public static void main(String[] args) throws Exception {
         //DictionaryCommandline.dictionaryBasic();
         boolean isRunning = true;
+        DictionaryGUI.runApplication();
         Scanner sc = new Scanner(System.in);
         DictionaryCommandline.dictionaryAdvanced();
 

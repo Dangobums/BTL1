@@ -22,7 +22,7 @@ public class DictionaryCommandline {
     }
     public static void dictionaryAdvanced() throws Exception {
         System.out.println("Choose a thing to do");
-        System.out.println("1.Insert from commandline" + "\n2.ShowAllWords");
+        System.out.println("1.Insert from file" + "\n2.ShowAllWords" + "\n3.lookUp");
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
         while (isRunning) {
