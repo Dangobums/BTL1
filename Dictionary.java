@@ -3,21 +3,28 @@ import java.util.*;
 
 public class Dictionary {
     private static int pos = 0;
-    private static LinkedHashSet<Word> words = new LinkedHashSet<>();
+    private static TreeMap<String, String> words = new TreeMap<>();
     // private static HashMap<String, String> w2 = new HashMap<>();
-    public static void add(Word word) {
-        words.add(word);
+    public static void addNewWord(String word_target, String word_explain) {
+        String result = new String();
+        if (words.containsKey(word_target)) {
+            result += words.get(word_target) + "\n";
+            words.put(word_target.toLowerCase(), result.toLowerCase());
+        }
+        else {
+            words.put(word_target.toLowerCase(), word_explain.toLowerCase());
+        }
     }
     public static void printAllWords() {
         System.out.println("No  " + "|English" + "   |Vietnamese");
         int i = 1;
-        for (Word word : words) {
-            System.out.println( i++ + "    |" + word.getWord_target() + "   |" + word.getWord_explain());
+        for (Map.Entry<String, String> word: words.entrySet()) {
+            System.out.println( i++ + "    |" + word.getKey() + "   |" + word.getValue());
         }
     }
 
     public static void tmp(Word a) {
-        if (words.contains(a)) {
+        if (words.containsKey(a)) {
             words.remove(a);
         }
     }
@@ -26,9 +33,9 @@ public class Dictionary {
         Scanner sc = new Scanner(System.in);
         String search_word = sc.nextLine();
         int i = 1;
-        for (Word word : words) {
-            if (word.getWord_target().contains(search_word)) {
-                System.out.println(i + " " + word.getWord_target() + " " + word.getWord_explain());
+        for (Map.Entry<String, String> word: words.entrySet()) {
+            if (word.getKey().contains(search_word.toLowerCase())) {
+                System.out.println(i + " " + word.getKey() + " " + word.getValue());
             }
             i++;
         }
@@ -36,9 +43,26 @@ public class Dictionary {
     public static String outPut(String search_word) {
         String result = new String();
         int i = 1;
-        for (Word word : words) {
-            if (word.getWord_target().contains(search_word)) {
-                result += word.getWord_target() + "\n";
+        for (Map.Entry<String, String> word: words.entrySet()) {
+            if (word.getKey().contains(search_word.toLowerCase())) {
+                result += word.getValue() + "\n";
+            }
+        }
+        return result;
+    }
+    public static String[] outPutNew(String search_word) {
+        int n = 0;
+        for (Map.Entry<String, String> word: words.entrySet()) {
+            if (word.getKey().contains(search_word.toLowerCase())) {
+                n++;
+            }
+        }
+        String[] result = new String[n];
+        int i = 0;
+        for (Map.Entry<String, String> word: words.entrySet()) {
+            if (word.getKey().contains(search_word.toLowerCase())) {
+                result[i] = (word.getKey());
+                i++;
             }
         }
         return result;
