@@ -11,12 +11,10 @@ public class DictionaryGUI extends JFrame {
     private JTextField textField1;
     private JButton button1;
     private JTextPane textPane1;
-    private JButton button2;
     private String[] words;
     private JList<String> list1;
     private JTextArea textArea1;
     private JTextField textField2;
-    private String[] reset = {"              "};
     DefaultListModel<String> lm = new DefaultListModel<>();
     // private JList list2 = new JList(words);;
 
@@ -28,11 +26,11 @@ public class DictionaryGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                lm = new DefaultListModel<>();
+                /*lm = new DefaultListModel<>();
                 String sel = textField1.getText();
                 words = Dictionary.outPutNew(sel);
                 lm.addAll(Arrays.asList(words));
-                list1.setModel(lm);
+                list1.setModel(lm);*/
             }
         });
         list1.addListSelectionListener(new ListSelectionListener() {
@@ -41,6 +39,24 @@ public class DictionaryGUI extends JFrame {
                 if (list1.getSelectedValue() != null) {
                     textArea1.setText((String)Dictionary.outPut(list1.getSelectedValue()));
                 }
+            }
+        });
+
+        textField1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                switch (e.getKeyCode()) {
+                    default:
+                        textField1.setText(Character.toString(e.getKeyChar()));
+                        String current = textField1.getText();
+                        lm = new DefaultListModel<>();
+                        words = Dictionary.outPutNew(current);
+                        lm.addAll(Arrays.asList(words));
+                        list1.setModel(lm);
+                        break;
+                }
+
             }
         });
     }

@@ -22,7 +22,7 @@ public class DictionaryManagement {
             String new_word = new String(parts[0]);
             String new_explain= new String(parts[1]);
             Dictionary.addNewWord(new_word, new_explain);
-            //System.out.println(temp);
+            System.out.println(temp);
             //System.out.println(new_word);
             //System.out.println(new_explain);
         }

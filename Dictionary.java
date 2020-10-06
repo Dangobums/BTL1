@@ -7,13 +7,15 @@ public class Dictionary {
     // private static HashMap<String, String> w2 = new HashMap<>();
     public static void addNewWord(String word_target, String word_explain) {
         String result = new String();
-        if (words.containsKey(word_target)) {
-            result += words.get(word_target) + "\n";
+        if (words.containsKey(word_target.toLowerCase())) {
+
+            result = words.get(word_target) + "\n" + word_explain;
             words.put(word_target.toLowerCase(), result.toLowerCase());
         }
         else {
-            words.put(word_target.toLowerCase(), word_explain.toLowerCase());
+            words.put(word_target.toLowerCase(),word_explain.toLowerCase());
         }
+
     }
     public static void printAllWords() {
         System.out.println("No  " + "|English" + "   |Vietnamese");
@@ -23,7 +25,7 @@ public class Dictionary {
         }
     }
 
-    public static void tmp(Word a) {
+    public static void removeWord(Word a) {
         if (words.containsKey(a)) {
             words.remove(a);
         }
