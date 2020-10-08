@@ -4,23 +4,17 @@ import java.util.*;
 public class Dictionary {
     private static int pos = 0;
     private static TreeMap<String, String> words = new TreeMap<>();
-    // private static HashMap<String, String> w2 = new HashMap<>();
-    public static void addNewWord(String word_target, String word_explain) {
-        String result = new String();
-        if (words.containsKey(word_target.toLowerCase())) {
-
-            result = words.get(word_target) + "\n" + word_explain;
-            words.put(word_target.toLowerCase(), result.toLowerCase());
-        }
-        else {
-            words.put(word_target.toLowerCase(),word_explain.toLowerCase());
-        }
-
+    public TreeMap<String, String> getWords() {
+        return words;
     }
+    public static void addNewWord(String word_target, String word_explain) {
+            words.put(word_target.toLowerCase(),word_explain.toLowerCase());
+    }
+
     public static void printAllWords() {
         System.out.println("No  " + "|English" + "   |Vietnamese");
         int i = 1;
-        for (Map.Entry<String, String> word: words.entrySet()) {
+        for (Map.Entry<String, String> word : words.entrySet()) {
             System.out.println( i++ + "    |" + word.getKey() + "   |" + word.getValue());
         }
     }
@@ -62,7 +56,7 @@ public class Dictionary {
         String[] result = new String[n];
         int i = 0;
         for (Map.Entry<String, String> word: words.entrySet()) {
-            if (word.getKey().contains(search_word.toLowerCase())) {
+            if (word.getKey().startsWith(search_word.toLowerCase())) {
                 result[i] = (word.getKey());
                 i++;
             }

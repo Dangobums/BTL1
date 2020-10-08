@@ -1,4 +1,5 @@
 
+import java.io.FileReader;
 import java.util.Scanner;
 import java.io.File;
 import java.io.BufferedReader;
@@ -14,17 +15,24 @@ public class DictionaryManagement {
     }
 
     public static void insertFromFile() throws Exception {
-        File file = new File("./src/dictionary.txt");
-        Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()) {
-            String temp = sc.nextLine();
-            String[] parts = temp.split(" ");
-            String new_word = new String(parts[0]);
-            String new_explain= new String(parts[1]);
-            Dictionary.addNewWord(new_word, new_explain);
-            System.out.println(temp);
-            //System.out.println(new_word);
+        File file = new File("./src/dictionaryNew.txt");
+        BufferedReader bf = new BufferedReader(new FileReader(file));
+        String ln = null;
+        while ((ln = bf.readLine()) != null) {
+            String new_word = "";
+            String new_explain = "";
+            String temp = "";
+            if (ln.contains("@")) {
+                //System.out.println(ln + " ");
+                new_word = ln.substring(1);
+                //System.out.println(new_word);
+                while ((ln = bf.readLine())!= null && !ln.contains("@")) {
+                    new_explain += ln + "\n";
+
+                }
+            }
             //System.out.println(new_explain);
+            Dictionary.addNewWord(new_word, new_explain);
         }
     }
     public static void dictionaryExportToFile() {

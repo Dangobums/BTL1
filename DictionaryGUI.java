@@ -14,12 +14,17 @@ public class DictionaryGUI extends JFrame {
     private String[] words;
     private JList<String> list1;
     private JTextArea textArea1;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
     private JTextField textField2;
     DefaultListModel<String> lm = new DefaultListModel<>();
     // private JList list2 = new JList(words);;
 
     public DictionaryGUI() {
-
+        words = Dictionary.outPutNew("");
+        lm.addAll(Arrays.asList(words));
+        list1.setModel(lm);
         list1.setSelectedIndex(2);
         list1.setVisibleRowCount(2);
         button1.addMouseListener(new MouseAdapter() {
@@ -41,15 +46,22 @@ public class DictionaryGUI extends JFrame {
                 }
             }
         });
-
         textField1.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
                 switch (e.getKeyCode()) {
+                    case KeyEvent.VK_BACK_SPACE:
+                        String current1 = textField1.getText();
+                        current1 =current1.substring(0, current1.length() - 1);
+                        lm = new DefaultListModel<>();
+                        words = Dictionary.outPutNew(current1);
+                        lm.addAll(Arrays.asList(words));
+                        list1.setModel(lm);
+                        //e.consume();
+                        break;
                     default:
-                        textField1.setText(Character.toString(e.getKeyChar()));
-                        String current = textField1.getText();
+                        String current = textField1.getText() + e.getKeyChar();
                         lm = new DefaultListModel<>();
                         words = Dictionary.outPutNew(current);
                         lm.addAll(Arrays.asList(words));
