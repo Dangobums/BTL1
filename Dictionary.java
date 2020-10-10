@@ -4,7 +4,7 @@ import java.util.*;
 public class Dictionary {
     private static int pos = 0;
     private static TreeMap<String, String> words = new TreeMap<>();
-    public TreeMap<String, String> getWords() {
+    public static TreeMap<String, String> getWords() {
         return words;
     }
     public static void addNewWord(String word_target, String word_explain) {

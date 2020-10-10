@@ -1,8 +1,12 @@
 
-import java.io.FileReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
-import java.io.File;
-import java.io.BufferedReader;
+import java.util.TreeMap;
 
 public class DictionaryManagement {
     public static void insertFromCommanline() {
@@ -21,22 +25,31 @@ public class DictionaryManagement {
         while ((ln = bf.readLine()) != null) {
             String new_word = "";
             String new_explain = "";
-            String temp = "";
             if (ln.contains("@")) {
-                //System.out.println(ln + " ");
-                new_word = ln.substring(1);
-                //System.out.println(new_word);
-                while ((ln = bf.readLine())!= null && !ln.contains("@")) {
+                new_word += ln.substring(1);
+                while ((ln = bf.readLine()) != null && !ln.contains("@")) {
                     new_explain += ln + "\n";
 
                 }
             }
             //System.out.println(new_explain);
+
             Dictionary.addNewWord(new_word, new_explain);
         }
+        bf.close();
     }
-    public static void dictionaryExportToFile() {
+    public static void dictionaryExportToFile() throws IOException {
+        File aggFileName = new File("./src/outputFile.txt");
+        FileWriter fstream = new FileWriter(aggFileName);
+        BufferedWriter out = new BufferedWriter(fstream);
+        TreeMap<String, String> sortedmap = Dictionary.getWords();
 
+        for (Map.Entry<String, String> entry : sortedmap.entrySet()) {
+            out.write(entry.getKey() + "\t" + entry.getValue());
+            out.flush();
+        }
+
+        out.close();
     }
     public static void dictionaryLookup() {
         Dictionary.lookUp();
