@@ -11,14 +11,6 @@ public class Dictionary {
             words.put(word_target.toLowerCase(),word_explain.toLowerCase());
     }
 
-    public static void printAllWords() {
-        System.out.println("No  " + "|English" + "   |Vietnamese");
-        int i = 1;
-        for (Map.Entry<String, String> word : words.entrySet()) {
-            System.out.println( i++ + "    |" + word.getKey() + "   |" + word.getValue());
-        }
-    }
-
     public static void removeWord(String a) {
         if (words.containsKey(a)) {
             words.remove(a);
