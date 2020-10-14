@@ -14,6 +14,7 @@ public class DictionaryGUI extends JFrame {
     private JButton button1;
     private JTextPane textPane1;
     private String[] words;
+    private final String[] defaults = Dictionary.outPutNew("");;
     private JList<String> list1;
     private JTextArea textArea1;
     private JButton unloadButton;
@@ -27,18 +28,17 @@ public class DictionaryGUI extends JFrame {
     private static final JFrame gui = new JFrame("Dictionary");
 
     public DictionaryGUI() {
-        words = Dictionary.outPutNew("");
-        lm.addAll(Arrays.asList(words));
+
+        lm.addAll(Arrays.asList(defaults));
         list1.setModel(lm);
-       list1.setSelectedIndex(1);
+        list1.setSelectedIndex(1);
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 try {
                     DictionaryManagement.insertFromFile();
-                    words = Dictionary.outPutNew("");
-                    lm.addAll(Arrays.asList(words));
+                    lm.addAll(Arrays.asList(defaults));
                     list1.setModel(lm);
                     list1.setSelectedIndex(1);
                 } catch (Exception exception) {
@@ -124,20 +124,23 @@ public class DictionaryGUI extends JFrame {
                 gui.setVisible(true);
                 String name = JOptionPane.showInputDialog(gui,"Word", null);
                 String word = JOptionPane.showInputDialog(gui,"Definition", null);
-                Dictionary.addNewWord(name, word);
+                if (name != null && word != null) {
+                    Dictionary.addNewWord(name, word);
+                }
                 }
         });
         deleteButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String wordToDelete = JOptionPane.showInputDialog(gui,"Word", "DeleteWord");
-                Dictionary.removeWord(wordToDelete);
-                words = Dictionary.outPutNew("");
-                  lm.addAll(Arrays.asList(words));
-                  list1.setModel(lm);
-                  list1.setSelectedIndex(1);
-
+                String wordToDelete = JOptionPane.showInputDialog(gui,"Word", null);
+                if (wordToDelete != null) {
+                    Dictionary.removeWord(wordToDelete);
+                    lm = new DefaultListModel<>();
+                    lm.addAll(Arrays.asList(defaults));
+                    list1.setModel(lm);
+                    list1.setSelectedIndex(1);
+                }
             }
         });
     }

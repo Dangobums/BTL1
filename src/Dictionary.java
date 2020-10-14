@@ -30,7 +30,7 @@ public class Dictionary {
         String search_word = sc.nextLine();
         int i = 1;
         for (Map.Entry<String, String> word: words.entrySet()) {
-            if (word.getKey().contains(search_word.toLowerCase())) {
+            if (word.getKey().equals(search_word.toLowerCase())) {
                 System.out.println(i + " " + word.getKey() + " " + word.getValue());
             }
             i++;
