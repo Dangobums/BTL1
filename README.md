@@ -2,5 +2,7 @@
 A Simple Dictionary in java 
 Some library needed:
  - FreeTTS
- - okHTTP
+From Maven lib:
+ - okHTTP3
  -com.google.gson
+ 
