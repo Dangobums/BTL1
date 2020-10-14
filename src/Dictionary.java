@@ -46,6 +46,18 @@ public class Dictionary {
         }
         return result;
     }
+    public static void search() {
+        System.out.print("Choose the word you want to find:");
+        Scanner sc = new Scanner(System.in);
+        String search_word = sc.nextLine();
+        int i = 1;
+        for (Map.Entry<String, String> word: words.entrySet()) {
+            if (word.getKey().equals(search_word.toLowerCase())) {
+                System.out.println(i + " " + word.getKey() + " " + word.getValue());
+            }
+            i++;
+        }
+    }
     public static String[] outPutNew(String search_word) {
         int n = 0;
         for (Map.Entry<String, String> word: words.entrySet()) {

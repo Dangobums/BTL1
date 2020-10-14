@@ -55,6 +55,9 @@ public class DictionaryManagement {
     public static void dictionaryLookup() {
         Dictionary.lookUp();
     }
+    public static void dictionarySearcher() {
+        Dictionary.search();
+    }
 
     public static void main(String[] args) throws Exception {
         //DictionaryCommandline.dictionaryBasic();
