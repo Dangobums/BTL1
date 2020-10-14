@@ -3,6 +3,6 @@ A Simple Dictionary in java
 Some library needed:
  - FreeTTS
 From Maven lib:
- - okHTTP
+ - okHTTP3
  -com.google.gson
  
