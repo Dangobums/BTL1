@@ -4,7 +4,7 @@ import java.net.*;
 import java.util.*;
 import com.google.gson.*;
 import okhttp3.*;
-
+//From microsoft
 public class Translator {
     /*  Configure the local environment:
      * Set the TRANSLATOR_TEXT_SUBSCRIPTION_KEY and TRANSLATOR_TEXT_ENDPOINT environment

@@ -29,7 +29,10 @@ public class DictionaryGUI extends JFrame {
 
     public DictionaryGUI() {
 
-        lm.addAll(Arrays.asList(defaults));
+        //lm.addAll(Arrays.asList(defaults));
+        for (String word: defaults) {
+            lm.addElement(word);
+        }
         list1.setModel(lm);
         list1.setSelectedIndex(1);
         button1.addMouseListener(new MouseAdapter() {
@@ -38,7 +41,10 @@ public class DictionaryGUI extends JFrame {
                 super.mouseClicked(e);
                 try {
                     DictionaryManagement.insertFromFile();
-                    lm.addAll(Arrays.asList(defaults));
+                    //lm.addAll(Arrays.asList(defaults));
+                    for (String word: defaults) {
+                        lm.addElement(word);
+                    }
                     list1.setModel(lm);
                     list1.setSelectedIndex(1);
                 } catch (Exception exception) {
@@ -68,10 +74,12 @@ public class DictionaryGUI extends JFrame {
                         current1 =current1.substring(0, current1.length() - 1);
                         lm = new DefaultListModel<>();
                         words = Dictionary.outPutNew(current1);
-//                        for (String word : words) {
-//                            lm.addElement(word);
-//                        }
-                        lm.addAll(Arrays.asList(words));
+                        for (String word : words) {
+                            lm.addElement(word);
+                        }
+
+                        //lm.addAll(Arrays.asList(words));
+
                         list1.setModel(lm);
                         //e.consume();
                         break;
@@ -85,7 +93,10 @@ public class DictionaryGUI extends JFrame {
 //                        for (String word : words) {
 //                            lm.addElement(word);
 //                        }
-                        lm.addAll(Arrays.asList(words));
+                        //lm.addAll(Arrays.asList(words));
+                        for (String word: words) {
+                            lm.addElement(word);
+                        }
                         list1.setModel(lm);
                         break;
                 }
@@ -137,7 +148,10 @@ public class DictionaryGUI extends JFrame {
                 if (wordToDelete != null) {
                     Dictionary.removeWord(wordToDelete);
                     lm = new DefaultListModel<>();
-                    lm.addAll(Arrays.asList(defaults));
+                    //lm.addAll(Arrays.asList(defaults));
+                    for (String word: defaults) {
+                        lm.addElement(word);
+                    }
                     list1.setModel(lm);
                     list1.setSelectedIndex(1);
                 }

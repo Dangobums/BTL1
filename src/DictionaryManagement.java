@@ -19,8 +19,10 @@ public class DictionaryManagement {
     }
 
     public static void insertFromFile() throws Exception {
+        InputStream is = DictionaryManagement.class.getResourceAsStream("dictionaryNew.txt");
+        InputStreamReader isr = new InputStreamReader(is);
         File file = new File("./src/dictionaryNew.txt");
-        BufferedReader bf = new BufferedReader(new FileReader(file));
+        BufferedReader bf = new BufferedReader(isr);
         String ln = null;
         while ((ln = bf.readLine()) != null) {
             String new_word = "";
@@ -37,10 +39,14 @@ public class DictionaryManagement {
             Dictionary.addNewWord(new_word, new_explain);
         }
         bf.close();
+        isr.close();
+        is.close();
     }
     public static void dictionaryExportToFile() throws IOException {
+        InputStream is = DictionaryManagement.class.getResourceAsStream("dictionaryNew.txt");
+        InputStreamReader isr = new InputStreamReader(is);
         File aggFileName = new File("./src/dictionaryNew.txt");
-        FileWriter fstream = new FileWriter(aggFileName);
+        FileWriter fstream = new FileWriter(String.valueOf(isr));
         BufferedWriter out = new BufferedWriter(fstream);
         TreeMap<String, String> sortedmap = Dictionary.getWords();
 
@@ -51,6 +57,8 @@ public class DictionaryManagement {
 
         out.close();
         fstream.close();
+        isr.close();
+        is.close();
     }
     public static void dictionaryLookup() {
         Dictionary.lookUp();
