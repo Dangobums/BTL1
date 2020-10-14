@@ -20,8 +20,8 @@ public class DictionaryGUI extends JFrame {
     private JButton unloadButton;
     private JButton newButton;
     private JButton deleteButton;
-    private JComboBox comboBox1;
     private JButton speakButton;
+    private JButton translateButton;
     private JTextField textField2;
     DefaultListModel<String> lm = new DefaultListModel<>();
     // private JList list2 = new JList(words);;
@@ -140,6 +140,20 @@ public class DictionaryGUI extends JFrame {
                     lm.addAll(Arrays.asList(defaults));
                     list1.setModel(lm);
                     list1.setSelectedIndex(1);
+                }
+            }
+        });
+        translateButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                String wordToTranslate = JOptionPane.showInputDialog(gui,"Word", null);
+                if (wordToTranslate != null) {
+                    try {
+                        JOptionPane.showMessageDialog(gui, Translator.Post(wordToTranslate));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 }
             }
         });

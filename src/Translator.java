@@ -20,36 +20,25 @@ public class Translator {
      */
     private static String subscriptionKey = "3e4f640e8b1c4658bcdfc13d9f23685d";
     private static String endpoint = "https://api.cognitive.microsofttranslator.com/";
-    String url = endpoint + "/translate?api-version=3.0&to=vi";
+    private static String url = endpoint + "/translate?api-version=3.0&to=vi";
 
     // Instantiates the OkHttpClient.
-    OkHttpClient client = new OkHttpClient();
-
+    private static OkHttpClient client = new OkHttpClient();
     // This function performs a POST request.
-    public String Post() throws IOException {
+    public static String Post(String word) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType,
-                "[{\n\t\"Text\": \"Welcome to Microsoft Translator. Guess how many languages I speak!\"\n}]");
+//        "[{\n\t\"Text\": \"Welcome to Microsoft Translator. Guess how many languages I speak!\"\n}]"
+        RequestBody body = RequestBody.create(mediaType, "[{\n\t\"Text\"" + ":" +"\"" + word +"\"\n}]");
         Request request = new Request.Builder()
                 .url(url).post(body)
                 .addHeader("Ocp-Apim-Subscription-Key", subscriptionKey)
                 .addHeader("Content-type", "application/json").build();
         Response response = client.newCall(request).execute();
-        return response.body().string();
-    }
+        String json= response.body().string();
 
-    public static String parseJSON(String json) {
+
         JsonElement element = JsonParser.parseString(json);
         return element.getAsJsonArray().get(0).getAsJsonObject().get("translations").getAsJsonArray().get(0).getAsJsonObject().get("text").toString();
     }
 
-    public static void main(String[] args) {
-        try {
-            Translator translateRequest = new Translator();
-            String response = translateRequest.Post();
-            System.out.println(parseJSON(response));
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
 }
