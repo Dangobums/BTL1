@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import static java.lang.System.setProperty;
+
 public class DictionaryManagement {
     public static void insertFromCommanline() {
         System.out.println("English ");
@@ -19,8 +21,9 @@ public class DictionaryManagement {
     }
 
     public static void insertFromFile() throws Exception {
+        setProperty("file.encoding","utf-8");
         InputStream is = DictionaryManagement.class.getResourceAsStream("dictionaryNew.txt");
-        InputStreamReader isr = new InputStreamReader(is);
+        InputStreamReader isr = new InputStreamReader(is,"utf8");
         File file = new File("./src/dictionaryNew.txt");
         BufferedReader bf = new BufferedReader(isr);
         String ln = null;
@@ -43,8 +46,9 @@ public class DictionaryManagement {
         is.close();
     }
     public static void dictionaryExportToFile() throws IOException {
+        setProperty("file.encoding","utf-8");
         InputStream is = DictionaryManagement.class.getResourceAsStream("dictionaryNew.txt");
-        InputStreamReader isr = new InputStreamReader(is);
+        InputStreamReader isr = new InputStreamReader(is,"utf8");
         File aggFileName = new File("./src/dictionaryNew.txt");
         FileWriter fstream = new FileWriter(String.valueOf(isr));
         BufferedWriter out = new BufferedWriter(fstream);
