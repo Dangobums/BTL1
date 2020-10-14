@@ -25,9 +25,9 @@ public class DictionaryManagement {
         while ((ln = bf.readLine()) != null) {
             String new_word = "";
             String new_explain = "";
-            if (ln.contains("@") && ln.charAt(0) == '@') {
+            if (ln.startsWith("@")) {
                 new_word += ln.substring(1);
-                while ((ln = bf.readLine()) != null && !ln.contains("@")) {
+                while ((ln = bf.readLine()) != null && !ln.startsWith("@")) {
                     new_explain += ln + "\n";
 
                 }
@@ -39,13 +39,13 @@ public class DictionaryManagement {
         bf.close();
     }
     public static void dictionaryExportToFile() throws IOException {
-        File aggFileName = new File("./src/outputFile.txt");
+        File aggFileName = new File("./src/dictionaryNew.txt");
         FileWriter fstream = new FileWriter(aggFileName);
         BufferedWriter out = new BufferedWriter(fstream);
         TreeMap<String, String> sortedmap = Dictionary.getWords();
 
         for (Map.Entry<String, String> entry : sortedmap.entrySet()) {
-            out.write(entry.getKey() + "\t" + entry.getValue());
+            out.write(entry.getKey() +"\n"+ "\t" + entry.getValue());
             out.flush();
         }
 

@@ -4,6 +4,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.VetoableChangeListener;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DictionaryGUI extends JFrame {
@@ -26,19 +28,22 @@ public class DictionaryGUI extends JFrame {
 
     public DictionaryGUI() {
         words = Dictionary.outPutNew("");
-//        for (String word : words) {
-//            lm.addElement(word);
-//        }
         lm.addAll(Arrays.asList(words));
         list1.setModel(lm);
-        list1.setSelectedIndex(2);
-        list1.setVisibleRowCount(2);
+       list1.setSelectedIndex(1);
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String name = JOptionPane.showInputDialog(gui,
-                        "Insert new word", null);
+                try {
+                    DictionaryManagement.insertFromFile();
+                    words = Dictionary.outPutNew("");
+                    lm.addAll(Arrays.asList(words));
+                    list1.setModel(lm);
+                    list1.setSelectedIndex(1);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
         });
         list1.addListSelectionListener(new ListSelectionListener() {
@@ -96,6 +101,42 @@ public class DictionaryGUI extends JFrame {
                 String[] parts = word.split("[/]" , 2);
                 Voice voice = new Voice();
                 voice.Speak(parts[0]);
+
+            }
+        });
+
+        unloadButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try {
+                    DictionaryManagement.dictionaryExportToFile();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
+        newButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                gui.pack();
+                gui.setVisible(true);
+                String name = JOptionPane.showInputDialog(gui,"Word", null);
+                String word = JOptionPane.showInputDialog(gui,"Definition", null);
+                Dictionary.addNewWord(name, word);
+                }
+        });
+        deleteButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                String wordToDelete = JOptionPane.showInputDialog(gui,"Word", "DeleteWord");
+                Dictionary.removeWord(wordToDelete);
+                words = Dictionary.outPutNew("");
+                  lm.addAll(Arrays.asList(words));
+                  list1.setModel(lm);
+                  list1.setSelectedIndex(1);
 
             }
         });

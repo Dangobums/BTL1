@@ -19,7 +19,7 @@ public class Dictionary {
         }
     }
 
-    public static void removeWord(Word a) {
+    public static void removeWord(String a) {
         if (words.containsKey(a)) {
             words.remove(a);
         }
